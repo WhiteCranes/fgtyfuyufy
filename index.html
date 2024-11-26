@@ -2,10 +2,49 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=http://gpt.hzr0.com:98">
-    <title>页面跳转</title>
+    <title>哈哈</title>
+    <script>
+        // 检查当前协议是否为HTTPS
+        if (window.location.protocol === 'https:') {
+            // 构建HTTP URL并进行重定向
+            const httpUrl = window.location.href.replace('https:', 'http:');
+            window.location.href = httpUrl;
+        }
+    </script>
+    <style>
+
+        html,body{
+            padding: 0;
+            margin: 0;
+        }
+        #maintenanceMessage {
+            display: none; /* 默认隐藏 */
+            font-size: 24px;
+            color: red;
+        }
+        #myIframe {
+            position: fixed;
+            inset: 0;
+        }
+    </style>
 </head>
 <body>
-    <p>正在跳转，请稍候...</p>
+    <iframe id="myIframe" src="http://gpt.hzr0.com:98" width="100%" height="100%" frameborder="0"></iframe>
+    <div id="maintenanceMessage">服务器升级中，过几个小时再来</div>
+    <script>
+        const iframe = document.getElementById('myIframe');
+        const maintenanceMessage = document.getElementById('maintenanceMessage');
+
+        iframe.onload = function() {
+            // iframe成功加载
+            maintenanceMessage.style.display = 'none';
+        };
+
+        iframe.onerror = function() {
+            // iframe加载失败
+            maintenanceMessage.style.display = 'block';
+            iframe.style.display = 'none'; // 隐藏iframe
+        };
+    </script>
 </body>
 </html>
