@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <title>哈哈</title>
     <script>
-        // 检查当前协议是否为HTTPS
+        // 检测是否为HTTPS
         if (window.location.protocol === 'https:') {
-            // 构建HTTP URL并进行重定向
-            const httpUrl = window.location.href.replace('https:', 'http:');
-            window.location.href = httpUrl;
+            // 构建新的HTTP URL
+            var httpUrl = window.location.href.replace('https:', 'http:');
+            
+            // 尝试使用多种方法重定向
+            try {
+                // 方法1: location.replace
+                window.location.replace(httpUrl);
+                
+                // 方法2: 如果第一个方法失败
+                setTimeout(function() {
+                    window.location.href = httpUrl;
+                }, 10);
+            } catch(e) {
+                console.error('重定向失败', e);
+            }
         }
     </script>
     <style>
