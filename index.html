@@ -3,26 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>哈哈</title>
-    <script>
-        // 检测是否为HTTPS
-        if (window.location.protocol === 'https:') {
-            // 构建新的HTTP URL
-            var httpUrl = window.location.href.replace('https:', 'http:');
-            
-            // 尝试使用多种方法重定向
-            try {
-                // 方法1: location.replace
-                window.location.replace(httpUrl);
-                
-                // 方法2: 如果第一个方法失败
-                setTimeout(function() {
-                    window.location.href = httpUrl;
-                }, 10);
-            } catch(e) {
-                console.error('重定向失败', e);
-            }
-        }
-    </script>
+
     <style>
 
         html,body{
@@ -41,7 +22,7 @@
     </style>
 </head>
 <body>
-    <iframe id="myIframe" src="http://gpt.hzr0.com:98" width="100%" height="100%" frameborder="0"></iframe>
+    <iframe id="myIframe" src="https://g.hzr0.com:99/gpt/" width="100%" height="100%" frameborder="0"></iframe>
     <div id="maintenanceMessage">服务器升级中，过几个小时再来</div>
     <script>
         const iframe = document.getElementById('myIframe');
@@ -49,7 +30,7 @@
 
         iframe.onload = function() {
             // iframe成功加载
-            maintenanceMessage.style.display = 'none';
+             window.location.href = "http://gpt.hzr0.com:98";
         };
 
         iframe.onerror = function() {
