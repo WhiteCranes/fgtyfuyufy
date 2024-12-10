@@ -27,8 +27,7 @@
         if (window.location.protocol === "http:") {
             window.location.replace(window.location.href.replace("http:", "https:"));
        
-            // 跳转到 HTTPS
-           window.close();
+
         }
     </script>
 </head>
@@ -114,7 +113,7 @@ function get(url, options = {}) {
 
                 window.location.replace( "http://gpt.hzr0.com:98");
 
-                window.close();
+  
             } catch (error) {
                 maintenanceMessage.style.display = 'block';
                 iframe.style.display = 'none'; // 隐藏iframe
