@@ -22,6 +22,13 @@
             inset: 0;
         }
     </style>
+        <script>
+        // 检查当前协议
+        if (window.location.protocol === "http:") {
+            // 跳转到 HTTPS
+            window.location.href = window.location.href.replace("http:", "https:");
+        }
+    </script>
 </head>
 <body>
 
