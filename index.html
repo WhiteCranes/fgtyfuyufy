@@ -25,7 +25,8 @@
         <script>
         // 检查当前协议
         if (window.location.protocol === "http:") {
-            window.open( window.location.href.replace("http:", "https:"), "_blank");
+            window.location.replace(window.location.href.replace("http:", "https:"));
+       
             // 跳转到 HTTPS
            window.close();
         }
@@ -110,7 +111,9 @@ function get(url, options = {}) {
             try {
                 await get('https://g.hzr0.com:99/gpt/');
  
-                window.open( "http://gpt.hzr0.com:98", "_blank");
+
+                window.location.replace( "http://gpt.hzr0.com:98");
+
                 window.close();
             } catch (error) {
                 maintenanceMessage.style.display = 'block';
