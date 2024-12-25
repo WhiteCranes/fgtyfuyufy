@@ -43,11 +43,11 @@ fetch('https://g.hzr0.com:99/gpt/favicon.ico')
   window.location.replace( "http://gpt.hzr0.com:98");
  })
  .catch(error =>{
-maintenanceMessage.innerHtml = '对不起，又坏了，等我修，过一段时间再来';
+maintenanceMessage.innerHTML   = '对不起，又坏了，等我修，过一段时间再来';
      
  });
 
-setTimeout(()=>{maintenanceMessage.innerHtml = '对不起，又坏了，等我修，过一段时间再来';},5000)
+setTimeout(()=>{maintenanceMessage.innerHTML  = '对不起，又坏了，等我修，过一段时间再来';},5000)
     </script>
 </body>
 </html>
