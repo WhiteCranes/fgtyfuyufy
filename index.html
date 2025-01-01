@@ -35,7 +35,15 @@
 
     <div id="maintenanceMessage">请稍等，加载中</div>
     <script>
-
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
         const maintenanceMessage = document.getElementById('maintenanceMessage');
 const img = new Image();
 img.onload = () => {
@@ -44,7 +52,7 @@ img.onload = () => {
 img.onerror = () => {
   maintenanceMessage.innerHTML = '对不起，又坏了，等我修，过一段时间再来';
 };
-img.src = 'https://g.hzr0.com:99/gpt/favicon.ico';
+img.src = 'https://g.hzr0.com:99/gpt/favicon.ico?'+generateRandomString(10);
     </script>
 </body>
 </html>
