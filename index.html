@@ -30,10 +30,73 @@
 
         }
     </script>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+        }
+        .failure {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-
+    <ul id="url-list"></ul>
+    <div id="results"></div>
     <div id="maintenanceMessage">请稍等，加载中</div>
+        <script>
+        const urls = [
+            "http://t.hzr0.com:98/",
+            "http://t1.hzr0.com:98/",
+            "http://t2.hzr0.com:98/",
+            "http://gpt.hzr0.com:98/",
+        ];
+
+        // Display the list of URLs being tested
+        const urlListElement = document.getElementById('url-list');
+        urls.forEach(url => {
+            const li = document.createElement('li');
+            li.textContent = url;
+            urlListElement.appendChild(li);
+        });
+
+        // Function to test TCP connection using fetch with no-cors
+        async function testConnection(url) {
+            try {
+                const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+                // If no exception is thrown, the TCP connection was successful
+                return true;
+            } catch (error) {
+                // If an exception is thrown, the TCP connection failed
+                return false;
+            }
+        }
+
+        // Function to display results
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            for (const url of urls) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'result';
+                resultDiv.textContent = `Testing ${url}...`;
+
+                resultsDiv.appendChild(resultDiv);
+
+                const isConnected = await testConnection(url);
+                resultDiv.className = isConnected ? 'result success' : 'result failure';
+                resultDiv.textContent = `${url} - ${isConnected ? 'Connected successfully' : 'Failed to connect'}`;
+            }
+        }
+
+        // Run the tests
+        runTests();
+    </script>
     <script>
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
