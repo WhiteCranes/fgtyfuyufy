@@ -1,121 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>哈哈</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gpt</title>
     <style>
-
-        html,body{
-            padding: 0;
+        /* 确保 html 和 body 占据全屏，无边距和滚动条 */
+        html, body {
+            height: 100%;
             margin: 0;
+            padding: 0;
+            overflow: hidden; /* 隐藏任何可能的滚动条 */
         }
-        #maintenanceMessage {
-            display: block; /* 默认隐藏 */
-            font-size: 24px;
-                       position: fixed;
-            inset: 20%;
-           text-align: center;
-        }
-        #myIframe {
+        
+        /* 设置 iframe 为固定位置，覆盖整个屏幕，无边框 */
+        iframe {
             position: fixed;
-            inset: 0;
-        }
-    </style>
-        <script>
-        // 检查当前协议
-        if (window.location.protocol === "http:") {
-            window.location.replace(window.location.href.replace("http:", "https:"));
-       
-
-        }
-    </script>
-        <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .result {
-            margin-top: 10px;
-        }
-        .success {
-            color: green;
-        }
-        .failure {
-            color: red;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none; /* 移除边框 */
+            display: block; /* 确保 iframe 作为块级元素，避免任何间隙 */
         }
     </style>
 </head>
 <body>
-    <ul id="url-list"></ul>
-    <div id="results"></div>
-    <div id="maintenanceMessage">机器损坏，用不了，已经买了新的，大概5月中旬恢复！@！！</div>
-        <script>
-        const urls = [
-            "http://t.hzr0.com:98/",
-            "http://t1.hzr0.com:98/",
-            "http://t2.hzr0.com:98/",
-            "http://gpt.hzr0.com:98/",
-        ];
-
-        // Display the list of URLs being tested
-        const urlListElement = document.getElementById('url-list');
-        urls.forEach(url => {
-            const li = document.createElement('li');
-            li.textContent = url;
-            urlListElement.appendChild(li);
-        });
-
-        // Function to test TCP connection using fetch with no-cors
-        async function testConnection(url) {
-            try {
-                const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
-                // If no exception is thrown, the TCP connection was successful
-                return true;
-            } catch (error) {
-                // If an exception is thrown, the TCP connection failed
-                return false;
-            }
-        }
-
-        // Function to display results
-        async function runTests() {
-            const resultsDiv = document.getElementById('results');
-            for (const url of urls) {
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'result';
-                resultDiv.textContent = `Testing ${url}...`;
-
-                resultsDiv.appendChild(resultDiv);
-
-                const isConnected = await testConnection(url);
-                resultDiv.className = isConnected ? 'result success' : 'result failure';
-                resultDiv.textContent = `${url} - ${isConnected ? 'Connected successfully' : 'Failed to connect'}`;
-            }
-        }
-
-        // Run the tests
-        runTests();
-    </script>
-    <script>
-function generateRandomString(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
-        const maintenanceMessage = document.getElementById('maintenanceMessage');
-const img = new Image();
-img.onload = () => {
-  window.location.replace("http://gpt.hzr0.com:98");
-};
-img.onerror = () => {
-  maintenanceMessage.innerHTML = '对不起，又坏了，等我修，过一段时间再来';
-};
-img.src = 'https://n.hzr0.com:99/gpt/favicon.ico?'+generateRandomString(10);
-    </script>
+    <!-- 内嵌 iframe，src 指定目标 URL -->
+    <iframe src="https://gpt.hzr0.com:99/"></iframe>
 </body>
 </html>
