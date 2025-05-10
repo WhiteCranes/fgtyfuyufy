@@ -23,10 +23,85 @@
             border: none; /* 移除边框 */
             display: block; /* 确保 iframe 作为块级元素，避免任何间隙 */
         }
+        
+        /* 错误提示样式 */
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            z-index: 1000;
+            display: none; /* 默认隐藏 */
+        }
+        
+        .error-message h2 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        
+        .error-message p {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
     <!-- 内嵌 iframe，src 指定目标 URL -->
-    <iframe src="https://gpt.hzr0.com:99/"></iframe>
+    <iframe id="mainFrame" src="https://gpt.hzr0.com:99/"></iframe>
+    
+    <!-- 错误提示 -->
+    <div id="errorMessage" class="error-message">
+        <h2>提示</h2>
+        <p>刷新一下，或者过一段时间再来呗，我会修复的。</p>
+    </div>
+
+    <script>
+        // 获取 iframe 元素
+        const iframe = document.getElementById('mainFrame');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // 设置超时时间（毫秒）
+        const timeout = 5000;
+        
+        // 创建一个超时的 Promise
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('超时')), timeout);
+        });
+        
+        // 检测 iframe 加载状态
+        iframe.onload = function() {
+            // iframe 成功加载
+            errorMessage.style.display = 'none';
+        };
+        
+        iframe.onerror = function() {
+            // iframe 加载失败
+            errorMessage.style.display = 'block';
+        };
+        
+        // 额外检测：如果iframe加载了，但是内容不可访问
+        setTimeout(function() {
+            try {
+                // 尝试访问iframe内容，如果跨域或者页面不存在会抛出错误
+                const iframeContent = iframe.contentWindow.document;
+                // 如果能执行到这一步，说明iframe内容可以访问
+            } catch (e) {
+                // 检查iframe是否已经有内容
+                try {
+                    if (iframe.contentDocument.body.innerHTML.length === 0) {
+                        errorMessage.style.display = 'block';
+                    }
+                } catch (err) {
+                    // 无法访问iframe内容，可能是因为跨域问题或者页面不存在
+                    errorMessage.style.display = 'block';
+                }
+            }
+        }, timeout);
+    </script>
 </body>
 </html>
