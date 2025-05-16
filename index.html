@@ -39,19 +39,23 @@
             font-size: 16px;
             text-align: center;
             color: #333;
+            z-index:99;
         }
     </style>
 </head>
 <body>
     <div id="content">
-        <div class="error-message">请稍等，如果长时间没反应</div>
+ 
         <!-- iframe 将在检查连接后添加 -->
     </div>
 
     <script>
         const targetUrl = 'https://gpt.hzr0.com:99/';
         const contentDiv = document.getElementById('content');
-        
+                        const errorMsg = document.createElement('div');
+                errorMsg.className = 'error-message';
+                errorMsg.innerText = '请稍等，如果长时间没反应，就等我恢复';
+                contentDiv.appendChild(errorMsg);
         // 检查URL是否可访问
         fetch(targetUrl, { mode: 'no-cors' })
             .then(() => {
@@ -59,13 +63,14 @@
                 const iframe = document.createElement('iframe');
                 iframe.src = targetUrl;
                 contentDiv.appendChild(iframe);
+                errorMsg.style.zIndex = '-1';
             })
             .catch(() => {
                 // 连接失败，显示错误消息
-                const errorMsg = document.createElement('div');
-                errorMsg.className = 'error-message';
-                errorMsg.innerText = '暂时无法打开，请稍后再试';
-                contentDiv.appendChild(errorMsg);
+                // const errorMsg = document.createElement('div');
+                // errorMsg.className = 'error-message';
+                // errorMsg.innerText = '暂时无法打开，请稍后再试';
+                // contentDiv.appendChild(errorMsg);
             });
     </script>
 </body>
