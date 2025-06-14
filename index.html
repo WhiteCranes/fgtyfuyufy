@@ -62,6 +62,7 @@
                 // 成功连接，创建并添加iframe
                 const iframe = document.createElement('iframe');
                 iframe.src = targetUrl;
+                iframe.allowFullscreen = true; 
                 contentDiv.appendChild(iframe);
                 errorMsg.style.zIndex = '-1';
             })
